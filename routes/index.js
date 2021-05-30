@@ -198,41 +198,58 @@ router.get('/test', function (req, res, next) {
 router.post('/register', upload.single('avatar'), function (req, res, next) {
 	console.log("entered /register");
 
-	var voterDetails = {
-		name: req.body.name,
-		aadhaar: req.body.aadhaar,
-		hasVoted: false,
-		isValid: false,
-		constituency: req.body.constituency
-	}
-	if(eligibleVoters[voterDetails.aadhaar].name !== voterDetails.name || eligibleVoters[voterDetails.aadhaar].age<18){
-		return res.render('message', {
-			message: 'Sorry! You are not allowed to vote.',
-			JWTData: req.JWTData
-		});
-	}
-
-	req.app.db.models.Voter.create(voterDetails, function (err, data) {
+	req.app.db.models.Voter.find({aadhaar: req.body.aadhaar}, function (err, data) {
 		if (err) {
 			console.log(err);
-			return next(err);
 		}
-
-		var voterID = JSON.stringify(data._id);
-
-		QRCode.toDataURL(voterID, function (err, url) {
-			console.log(url);
-			var im = url.split(",")[1];
-			var img = new Buffer(im, 'base64');
-
-			res.writeHead(200, {
-				'Content-Type': 'image/png',
-				'Content-Length': img.length,
-				'Content-Disposition': 'attachment; filename="Voter_QR.png"'
+		if (data && data[0].hasVoted == true) {
+		// if (false) {
+			return res.render('message', {
+				message: 'Sorry! You Already Voted.',
+				JWTData: req.JWTData
 			});
-			res.end(img);
-		})
-	});
+		} 
+		else{
+			if (data && data[0].isValid == true) {
+				data[0].remove();	
+			}
+			var voterDetails = {
+				name: req.body.name,
+				aadhaar: req.body.aadhaar,
+				hasVoted: false,
+				isValid: false,
+				constituency: req.body.constituency
+			}
+			if(eligibleVoters[voterDetails.aadhaar].name !== voterDetails.name || eligibleVoters[voterDetails.aadhaar].age<18){
+				return res.render('message', {
+					message: 'Sorry! You are not allowed to vote.',
+					JWTData: req.JWTData
+				});
+			}
+		
+			req.app.db.models.Voter.create(voterDetails, function (err, data) {
+				if (err) {
+					console.log(err);
+					return next(err);
+				}
+		
+				var voterID = JSON.stringify(data._id);
+		
+				QRCode.toDataURL(voterID, function (err, url) {
+					console.log(url);
+					var im = url.split(",")[1];
+					var img = new Buffer(im, 'base64');
+		
+					res.writeHead(200, {
+						'Content-Type': 'image/png',
+						'Content-Length': img.length,
+						'Content-Disposition': 'attachment; filename="Voter_QR.png"'
+					});
+					res.end(img);
+				})
+			});
+		}
+	})
 });
 
 router.post('/verifyvoter', upload.any(), function (req, res, next) {
@@ -272,7 +289,8 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 					});
 				} else {
 					console.log('Entered here');
-					
+					data.isValid = true;
+			        data.save();
 					var voteUrl = '/votecandidate';
 
 									var votePayload = {
