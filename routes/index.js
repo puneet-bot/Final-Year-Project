@@ -131,7 +131,6 @@ router.get('/', function (req, res, next) {
 	res.render('index', {
 		JWTData: req.JWTData
 	});
-	console.log(window.location);
 });
 
 router.get('/votecandidate', function (req, res, next) {
