@@ -18,7 +18,7 @@ export const test = (server) => {
 				});
 		});
 
-		it('GET /vota', function (done) {
+		it('GET /vote', function (done) {
 			chai.request(server)
 				.get('/vote')
 				.end(function (err, res) {
