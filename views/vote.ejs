@@ -1,0 +1,195 @@
+<% include header.ejs %>
+<style>
+
+
+.show-modali {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1.75rem 3.5rem;
+  margin: 5rem 2rem;
+  border: none;
+  background-color: white;
+  color: #444;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
+.close-modali {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+p {
+  font-size: 1.8rem;
+}
+
+/* -------------------------- */
+/* CLASSES TO MAKE MODAL WORK */
+.hiddeni {
+  display: none;
+}
+
+.modali {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+
+  background-color: white;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.overlayi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+</style>
+<div class="modali">
+    <button class="close-modali">&times;</button>
+    <h1 style="text-align: center;">मतदान में आपका स्वागत है</h1>
+    <p>
+        मतदान में आपका स्वागत है 🙏 , कृपया नीचे अपलोड क्यूआर कोड बटन पर क्लिक करें । अपना क्यूआर कोड अपलोड करने के बाद कृपया सबमिट माय कोड पर क्लिक करें ।
+        <hr>
+        <br>
+        <h1 style="text-align: center;">Welcome to Voting Phase</h1>
+        <span style="font-size: 32px">Welcome to the Voting Phase 🙏, Please click on Upload QR Code button below . After Uploading your QR code please click on submit my code .</span>
+
+    </p>
+  </div>
+  <div class="overlayi hiddeni"></div>
+    <div class="container">
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4 text-center">Welcome to the Voting Phase</h1>
+                        <p class="lead text-center">
+
+                            <small id="txtmsg">Please upload your QR Code below</small>
+                            <hr>
+                            <div class="lds-css ng-scope">
+                                <div class="lds-spinner" style="width: 100%;height:100%; margin: 0 auto">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div class="text-center" style="margin: 0 auto;">
+                                    <img src="" id="qr_img" style="margin: 0 auto; display:block;">
+                                    <!-- <video autoplay id="camera" class="text-center" style="margin: 0 auto; display:none;"></video>
+                                    <canvas class="text-center" style="margin: 0 auto;" id='snapshots'></canvas> -->
+                                    <br>
+                                </div>
+                            </div>
+                            <div type="button" class="file btn btn-success btn-lg btn-block" id="upload_qr" style="position: relative;
+                            overflow: hidden;">
+                                <input type="file" name="file" id="qr_file" style="position: absolute;
+                                font-size: 50px;
+                                opacity: 0;
+                                right: 0;
+                                top: 0;" onchange="javascript:upload_qr(event);" accept="image/*" />Upload My QR Code</div>
+
+                            <form method="post" action="/verifyvoter" enctype="multipart/form-data">
+                                <div style="display:none;">
+                                    <input type="hidden" class="form-control" id="qrdata" name="qrdata" filename="name1">
+                                    <input type="hidden" class="form-control" id="avatar" name="avatar" filename="name">
+                                </div>
+
+                                <div type="button" class="btn btn-primary btn-lg btn-block" id="submit_qr" onclick="javascript:submit_qr_func(event);" style="position: relative;
+                            overflow: hidden; display:none; visibility: hidden;">
+                                    Submit My QR Code</div>
+
+                                <div type="button" class="btn btn-success btn-lg btn-block" id="verify_btn"  onclick="javascript:document.forms[0].submit();"
+                                    style="position: relative;">
+                                    Submit</div>
+                            </form>
+
+                            <!-- <div class="custom-control custom-radio">
+                                <input type="radio" id="rahul" name="candidate" value="Rahul Gandhi" class="custom-control-input">
+                                <label class="custom-control-label" for="rahul">Rahul Gandhi</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="modi" name="candidate" value="Narendra Modi" class="custom-control-input">
+                                <label class="custom-control-label" for="modi">Narendra Modi</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="arvind" name="candidate" value="Arvind Kejrival" class="custom-control-input">
+                                <label class="custom-control-label" for="arvind">Arvind Kejrival</label>
+                            </div> -->
+                        </p>
+                        <!-- <button class="btn btn-primary" id="vote_btn" onclick="voteForCandidate()">Vote</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+<script>
+    const modal = document.querySelector('.modali');
+    const overlay = document.querySelector('.overlayi');
+    const btnCloseModal = document.querySelector('.close-modali');
+    // const btnsOpenModal = document.querySelectorAll('.show-modal');
+
+    window.onload =function(){
+        openModal();
+    }
+        const openModal = function () {
+            console.log(1);
+            modal.classList.remove('hiddeni');
+            overlay.classList.remove('hiddeni');
+        };
+
+        const closeModal = function () {
+            console.log(2);
+            modal.classList.add('hiddeni');
+            overlay.classList.add('hiddeni');
+        };
+
+        btnCloseModal.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', function (e) {
+            // console.log(e.key);
+
+            if (e.key === 'Escape' && !modal.classList.contains('hiddeni')) {
+                closeModal();
+            }
+        });
+
+    
+</script>
+    </html>

@@ -1,0 +1,82 @@
+<% include header.ejs %>
+
+	<script src="dist/2.7.2/Chart.bundle.js"></script>
+	<script src="utils.js"></script>
+	<script src="/javascripts/blockchain.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+
+	<body style="background-color:white;">
+		<h1 style="font-size: 122px;text-align: center;">Election Poll Results</h1>
+		<div class="container">
+		<div id="canvas-holder" style="width:90%; text-align: center; margin-top: 50px;">
+			
+			<script src="/javascripts/final-result.js"></script>
+			<canvas id="chart-area"></canvas>
+		</div>
+	</div>
+		<div class="container" style="margin-top: 40px;">
+			<div class="row">
+			  <div class="col-sm">
+				  <h1>Delhi Poll Analysis</h1>
+				<div id="canvas-holder" style="width: 450px ;height:300px;">
+					<canvas id="myChart"></canvas>
+					<script src="/javascripts/delhi.js"></script>
+				</div>
+			  </div>
+			  <div class="col-sm">
+				<h1>Uttar Pradesh Poll Analysis</h1>
+				<div id="canvas-holder" style="width: 450px ;height:300px;">
+					<canvas id="myChart-1"></canvas>
+					<script src="/javascripts/up.js"></script>
+				</div>
+			  </div>
+			  <div class="col-sm">
+				<h1>Maharashtra Poll Analysis</h1>
+				<div id="canvas-holder" style="width: 450px ;height:300px;">
+					<canvas id="myChart-2"></canvas>
+					<script src="/javascripts/maha.js"></script>
+				</div>
+			  </div>
+			  <div class="col-sm">
+				<h1>Rajasthan Poll Analysis</h1>
+				<div id="canvas-holder" style="width: 450px ;height:300px;">
+					<canvas id="myChart-3"></canvas>
+					<script src="/javascripts/raja.js"></script>
+				</div>
+			  </div>
+			  <div class="col-sm">
+				<h1>Haryana Poll Analysis</h1>
+				<div id="canvas-holder" style="width: 450px ;height:300px;">
+					<canvas id="myChart-4"></canvas>
+					<script src="/javascripts/hari.js"></script>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		<!-- <div class="row">
+			<div class="col-sm">
+				
+				<div >
+					
+				</div>
+				<div >
+					<canvas id="myChart-2" width="90%" height="30%"></canvas>
+					<script src="/javascripts/maha.js"></script>
+				</div>
+			</div>
+
+		</div> -->
+		
+		
+	
+	</body >
+
+	</html >
+
+			
