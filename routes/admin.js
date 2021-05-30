@@ -70,8 +70,7 @@ router.get('/logout', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
 	console.log('Entered post /login');
-
-	req.app.db.models.Admin.findOne({
+	req.app.db.models.Admin.find({
 		'login_id': req.body.login_id
 	}, function (err, data) {
 		if (err) {
