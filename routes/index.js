@@ -202,7 +202,7 @@ router.post('/register', upload.single('avatar'), function (req, res, next) {
 		if (err) {
 			console.log(err);
 		}
-		if (data && data[0].hasVoted == true) {
+		if (data.length !== 0 && data[0].hasVoted == true) {
 		// if (false) {
 			return res.render('message', {
 				message: 'Sorry! You Already Voted.',
@@ -210,7 +210,7 @@ router.post('/register', upload.single('avatar'), function (req, res, next) {
 			});
 		} 
 		else{
-			if (data && data[0].isValid == true) {
+			if (data.length !== 0 && data[0].isValid == true) {
 				data[0].remove();	
 			}
 			var voterDetails = {
