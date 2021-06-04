@@ -324,4 +324,15 @@ router.get('/voteadded/:id', function (req, res, next) {
 	});
 });
 
+router.get('/about',function(req,res){
+	
+		console.log("here");
+		res.render('about');
+});
+
+router.get('/Candidates',function(req,res){
+	
+	console.log("here");
+	res.render('Candidates');
+});
 module.exports = router;
