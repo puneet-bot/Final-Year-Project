@@ -3,7 +3,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 var fs = require('fs')
 web3.eth.accounts
 
-code = fs.readFileSync('C://Users//PUNEET ARORA//Downloads//5_6147420621006439197//blockchain//voting.sol').toString()
+code = fs.readFileSync('C://Users//namit//Desktop//Projects//MATDAAN//Final-Year-Project//blockchain//voting.sol').toString()
 solc = require('solc')
 compiledCode = solc.compile(code)
 abiDefinition = JSON.parse(compiledCode.contracts[':Voting'].interface)
