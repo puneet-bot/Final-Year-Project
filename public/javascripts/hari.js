@@ -6,7 +6,7 @@ var myChart = new Chart(ctx, {
   data: {
     labels: ["No. Voters Registered", "Voted" , "Verified"],
     datasets: [
-      { label: '# of students',
+      { label: '# of votes',
         data: [105,90,105],
         backgroundColor :['rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

@@ -1,6 +1,6 @@
 
   
-var ctx = document.getElementById("myChart-3");
+var ctx = document.getElementById("myChart-6");
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
