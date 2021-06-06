@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
@@ -185,9 +187,54 @@ router.get('/register', function (req, res, next) {
 
 router.get('/results', function (req, res, next) {
 	res.render('results', {
-		JWTData: req.JWTData
+		JWTData: req.JWTData,
 	});
+})
+
+
+
+
+router.get('/voteResults', async function (req, res, next) {
+	var constituency = ['Delhi','Rajasthan','Uttar Pradesh','Maharashtra','Gujarat','Haryana','Uttarakhand']
+	var resultHasRegistered = [];
+	var resultHAsVerified = [];
+	var resultHasVoted = [];
+	for(var i = 0 ; i < constituency.length ; i++){
+		await req.app.db.models.Voter.find({constituency:constituency[i]},function(err,data) {
+		  if(err){
+			console.log(err)
+			return;
+		  }
+		  resultHasRegistered.push(data.length);
+		});
+		await req.app.db.models.Voter.find({constituency:constituency[i],hasVoted:true},function(err,data) {
+		  if(err){
+			console.log(err)
+			return;
+		  }
+		  resultHasVoted.push(data.length);
+		});
+		await req.app.db.models.Voter.find({constituency:constituency[i],isValid:true},function(err,data) {
+		  if(err){
+			console.log(err)
+			return;
+		  }
+		  resultHAsVerified.push(data.length);
+		});
+	  
+	}
+	var data = {
+		resultHasRegistered:resultHasRegistered,
+		resultHasVoted:resultHasVoted,
+		resultHAsVerified:resultHAsVerified
+	}
+	res.json(data)
 });
+
+export function newData() {
+	var data = axios.get('localhost:3000/voteResults');
+	return Promise.resolve(data)
+}
 
 router.get('/test', function (req, res, next) {
 	helper.test(5, function (data) {

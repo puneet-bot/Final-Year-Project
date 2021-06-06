@@ -8,6 +8,7 @@
     "testrpc": "node_modules/ethereumjs-testrpc/build/cli.node.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "big-number": "^2.0.0",
     "body-parser": "~1.17.1",
     "chai": "^4.1.2",
