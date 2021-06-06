@@ -12,6 +12,7 @@ var Jimp = require("jimp");
 var upload = multer({
 	dest: 'uploads/'
 });
+var const_date = 1622986205;
 
 var eligibleVoters = {
 	'1': { name: 'user1', age: '29' },
@@ -174,9 +175,17 @@ router.get('/votecandidate', function (req, res, next) {
 });
 
 router.get('/vote', function (req, res, next) {
-	res.render('vote', {
-		JWTData: req.JWTData
-	});
+	if(Math.floor(Date.now() / 1000) >= const_date){
+		res.render('vote', {
+			JWTData: req.JWTData
+		});
+	}
+	else{
+		return res.render('message', {
+			message: 'Voting Phase Not Yet Started!!',
+			JWTData: req.JWTData
+		});
+	}
 });
 
 router.get('/register', function (req, res, next) {
@@ -186,9 +195,17 @@ router.get('/register', function (req, res, next) {
 });
 
 router.get('/results', function (req, res, next) {
-	res.render('results', {
-		JWTData: req.JWTData,
-	});
+	if(Math.floor(Date.now() / 1000) >= const_date){
+		res.render('results', {
+			JWTData: req.JWTData
+		});
+	}
+	else{
+		return res.render('message', {
+			message: 'Voting Phase Not Yet Started!!',
+			JWTData: req.JWTData
+		});
+	}
 })
 
 
@@ -300,8 +317,8 @@ router.post('/register', upload.single('avatar'), function (req, res, next) {
 });
 
 router.post('/verifyvoter', upload.any(), function (req, res, next) {
-
-	var qr_uri = req.body.qrdata;
+	if(Math.floor(Date.now() / 1000) >= const_date){
+		var qr_uri = req.body.qrdata;
 	var qr = new QrCode();
 	var id;
 
@@ -355,6 +372,14 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 		};
 		qr.decode(image.bitmap);
 	});
+	}
+	else{
+		return res.render('message', {
+			message: 'Voting Phase Not Yet Started!!',
+			JWTData: req.JWTData
+		});
+	}
+	
 });
 
 router.get('/voteadded/:id', function (req, res, next) {
