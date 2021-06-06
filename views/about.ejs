@@ -1,7 +1,38 @@
 <% include header.ejs %>
-
-<style>
-
+<script>
+  const oldnavbar=(document.querySelector('.jkil'));
+  oldnavbar.style.display='none';
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Matdaan🙏</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/register" style="color: black; text-decoration: none;">Register<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/vote" style="color: black; text-decoration: none;">Vote<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/results" style="color: black; text-decoration: none;">Results<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/about" style="color: black; text-decoration: none;">About Us<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/candidates" style="color: black; text-decoration: none;">Candidates<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <div style="float: right;">
+        <a class="btn btn-primary" style="color: white; text-decoration: none;" href="/admin">Admin</a>
+      </div>
+    </div>
+  </nav>
+    <style>
 
 /* Logo */
 header .logo {
@@ -660,37 +691,20 @@ body {
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-    <h4 class="text-center"><strong>Team Member1</strong></h4>
+    <h4 class="text-center"><strong style="color: black;">Team Member 1</strong></h4>
     <hr>
     <div class="profile-card-4 text-center"><img src="/images/namit.jpg" class="img img-responsive">
         <div class="profile-content">
             <div class="profile-name" style="color: black;">Namit Jain
-                <p>namit.jain@gamil.com</p>
+                <p style="color: black;">namit.jain@gamil.com</p>
             </div>
             <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-            <!-- <div class="row">
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>10th </p>
-                        <h4>100 % </h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p> 12th </p>
-                        <h4> 100 % </h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p> B.tech</p>
-                        <h4> 200 % </h4></div>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
 
 <div class="col-md-6">
-    <h4 class="text-center"><strong>Team Member3</strong></h4>
+    <h4 class="text-center"><strong style="color: black;">Team Member 2</strong></h4>
     <hr>
     <div class="profile-card-4 text-center"><img src="/images/pratiksha.jpg" class="img img-responsive">
         <div class="profile-content">
@@ -698,58 +712,26 @@ body {
                 <p>pratiksa.upadhya@gmail.com</p>
             </div>
             <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-            <!-- <div class="row">
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>TWEETS</p>
-                        <h4>1300</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWERS</p>
-                        <h4>250</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWING</p>
-                        <h4>168</h4></div>
-                </div>
-            </div> -->
+           
         </div>
     </div>
 </div>
 		<div class="col-md-6">
-    <h4 class="text-center"><strong>Team Member3</strong></h4>
+    <h4 class="text-center"><strong style="color: black;">Team Member 3</strong></h4>
     <hr>
     <div class="profile-card-4 text-center"><img src="/images/praver.jpg" class="img img-responsive">
         <div class="profile-content">
             <div class="profile-name" style="color: black;">Praver Chaurasia
-                <p>praver@gmail.com</p>
+                <p style="color: black;">praver@gmail.com</p>
             </div>
             <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-            <!-- <div class="row">
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>TWEETS</p>
-                        <h4>1300</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWERS</p>
-                        <h4>250</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWING</p>
-                        <h4>168</h4></div>
-                </div>
-            </div> -->
+           
         </div>
     </div>
 </div>
 
 <div class="col-md-6">
-    <h4 class="text-center"><strong>Team Member3</strong></h4>
+    <h4 class="text-center"><strong style="color: black;">Team Member 4</strong></h4>
     <hr>
     <div class="profile-card-4 text-center"><img src="/images/PUNEET.jpg" class="img img-responsive">
         <div class="profile-content">
@@ -757,23 +739,7 @@ body {
                 <p>puneetarora075@gmail.com</p>
             </div>
             <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-            <!-- <div class="row">
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>TWEETS</p>
-                        <h4>1300</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWERS</p>
-                        <h4>250</h4></div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="profile-overview">
-                        <p>FOLLOWING</p>
-                        <h4>168</h4></div>
-                </div>
-            </div> -->
+           
         </div>
     </div>
 </div>
@@ -789,3 +755,6 @@ body {
 
 </body>
 </html>
+
+
+<% include footer.ejs %>

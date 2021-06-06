@@ -326,13 +326,15 @@ router.get('/voteadded/:id', function (req, res, next) {
 
 router.get('/about',function(req,res){
 	
-		console.log("here");
 		res.render('about');
 });
 
 router.get('/Candidates',function(req,res){
 	
-	console.log("here");
 	res.render('Candidates');
+});
+router.get('/refer',function(req,res){
+	
+	res.render('refer');
 });
 module.exports = router;

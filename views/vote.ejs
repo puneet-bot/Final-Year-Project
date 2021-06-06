@@ -1,5 +1,38 @@
 <% include header.ejs %>
-<style>
+<script>
+  const oldnavbar=(document.querySelector('.jkil'));
+  oldnavbar.style.display='none';
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Matdaan🙏</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/register" style="color: black; text-decoration: none;">Register<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/vote" style="color: black; text-decoration: none;">Vote<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/results" style="color: black; text-decoration: none;">Results<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/about" style="color: black; text-decoration: none;">About Us<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/candidates" style="color: black; text-decoration: none;">Candidates<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <div style="float: right;">
+        <a class="btn btn-primary" style="color: white; text-decoration: none;" href="/admin">Admin</a>
+      </div>
+    </div>
+  </nav>
+    <style>
 
 
 .show-modali {
@@ -193,3 +226,4 @@ p {
     
 </script>
     </html>
+

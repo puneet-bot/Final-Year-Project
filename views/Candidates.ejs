@@ -1,6 +1,38 @@
 <% include header.ejs %>
-
-<style>
+<script>
+  const oldnavbar=(document.querySelector('.jkil'));
+  oldnavbar.style.display='none';
+</script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Matdaan🙏</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/register" style="color: black; text-decoration: none;">Register<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/vote" style="color: black; text-decoration: none;">Vote<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/results" style="color: black; text-decoration: none;">Results<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/about" style="color: black; text-decoration: none;">About Us<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
+            <a href="/candidates" style="color: black; text-decoration: none;">Candidates<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <div style="float: right;">
+        <a class="btn btn-primary" style="color: white; text-decoration: none;" href="/admin">Admin</a>
+      </div>
+    </div>
+  </nav>
+    <style>
   /*****************
     - Header -
 *****************/
@@ -720,7 +752,7 @@ body {
       <div class="col-md-4">
         
         <hr>
-        <div class="profile-card-2"><img src="https://s3.scoopwhoop.com/anj/1/868474934.jpg" class="img img-responsive" height="360" width="302">
+        <div class="profile-card-2"><img src="https://s3.scoopwhoop.com/anj/1/868474934.jpg" class="img img-responsive" height="360" width="322">
           <div class="profile-name">MAMTA BANERJEE</div>
           <div class="profile-username">All India Trinamool Congress</div>
         </div>
@@ -733,8 +765,57 @@ body {
           <div class="profile-username">Aam Aadmi Party</div>
         </div>
       </div>
-
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.ZM460UmlR9nH085fWdYwkQAAAA?w=184&h=184&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="302">
+          <div class="profile-name">PRIYANKA GANDHI</div>
+          <div class="profile-username">Indian National Congress</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.IvKJf-IRJyfwAQz7oEGMygHaFj?w=230&h=180&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="342">
+          <div class="profile-name">MAYAWATI</div>
+          <div class="profile-username">Bahujan Samaj Party</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.Aue3PptxUhOMDQnyF_5niwHaE8?w=223&h=180&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="352">
+          <div class="profile-name">N Chandrababu Naidu</div>
+          <div class="profile-username">Telugu Desam Party</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.f3BvyW5JNjL7IjY4puA0YQHaGR?w=193&h=180&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="302">
+          <div class="profile-name">AKHILESH YADAV</div>
+          <div class="profile-username">Samajwadi Party</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.1KF3na4MdTXbBjE_uwUpLgHaGE?w=210&h=180&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="302">
+          <div class="profile-name">Asaduddin Owaisi</div>
+          <div class="profile-username">All India Majlis-e-Ittehadul Muslimeen</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+        <hr>
+        <div class="profile-card-2"><img src="https://th.bing.com/th/id/OIP.3hFK8nA-8ySuhSKMkgn3DgHaIH?w=140&h=180&c=7&o=5&dpr=1.25&pid=1.7" class="img img-responsive" height="360" width="302">
+          <div class="profile-name">ANURAG THAKUR</div>
+          <div class="profile-username">Bharatiya Janata Party</div>
+        </div>
+      </div>
 
 
     </div>
   </div>
+
+  <% include footer.ejs %>
