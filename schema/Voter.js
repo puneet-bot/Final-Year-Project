@@ -3,6 +3,7 @@ const schema = {
     aadhaar: String,
     hasVoted: Boolean,
     isValid: Boolean,
+    otp:Number,
     constituency: String,
     created: {
         type: Date,

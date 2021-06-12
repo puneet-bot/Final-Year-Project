@@ -32,6 +32,7 @@
     "request": "^2.85.0",
     "serve-favicon": "~2.4.2",
     "solc": "^0.4.17",
+    "twilio": "^3.63.1",
     "web3": "^0.20.7"
   },
   "devDependencies": {
