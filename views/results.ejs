@@ -731,7 +731,7 @@
    * @return {Void}
    */
   function setup() {
-    var number = prompt('How many Christmas balls would you like?'), particle, i;
+    var number = 150, particle, i;
     // var number = 150, particle, i;
     // Setup snow particles
     for (i=0; i<number; i++) {
@@ -741,7 +741,7 @@
     // Set animation intervals
     animationInterval = setInterval(moveChristmasballs, 33);
   }
-  setup();
+  setTimeout(function(){ setup() }, 3000);;
 }());
 
 		</script>

@@ -350,7 +350,7 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 						OTP += digits[Math.floor(Math.random() * 10)];
 					}
 					data.otp = parseFloat(OTP)
-					data.save()
+					// data.save()
 					/****************************************************************/
 
 					/**************************Send Otp To The Registered Number******************************/
