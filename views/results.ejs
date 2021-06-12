@@ -10,49 +10,389 @@
 			-ms-user-select: none;
 		}
 	</style>
-<script>
-  const oldnavbar=(document.querySelector('.jkil'));
-  oldnavbar.style.display='none';
-</script>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="/">Matdaan🙏</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	  <span class="navbar-toggler-icon"></span>
-	</button>
-  
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-	  <ul class="navbar-nav mr-auto" >
-		<li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
-			<a href="/register" style="color: black; text-decoration: none;">Register<span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
-			<a href="/vote" style="color: black; text-decoration: none;">Vote<span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
-			<a href="/results" style="color: black; text-decoration: none;">Results<span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
-			<a href="/about" style="color: black; text-decoration: none;">About Us<span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item active" style="margin-left: 20px; font-size: 22px;">
-			<a href="/candidates" style="color: black; text-decoration: none;">Candidates<span class="sr-only">(current)</span></a>
-		</li>
-	  </ul>
-	  <div style="float: right;">
-		<a class="btn btn-primary" style="color: white; text-decoration: none;" href="/admin">Admin</a>
-	  </div>
-	</div>
-  </nav>
+	<style>
+		.show-modali {
+			font-size: 2rem !important;
+			font-weight: 600 !important;
+			padding: 1.75rem 3.5rem !important;
+			margin: 5rem 2rem !important;
+			border: none;
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			color: #444 !important;
+			border-radius: 10rem !important;
+			cursor: pointer;
+		}
+		#enpar{
+			font-size: 26px !important;
+		}
+
+		.close-modali {
+			position: absolute;
+			top: 1.2rem;
+			right: 2rem;
+			font-size: 5rem;
+			color: #333;
+			cursor: pointer;
+			border: none;
+			background: none;
+		}
+
+		h1 {
+			font-size: 2.5rem !important;
+			margin-bottom: 2rem !important;
+		}
+
+		p {
+			font-size: 1.8rem !important;
+		}
+
+		/* -------------------------- */
+		/* CLASSES TO MAKE MODAL WORK */
+		.hiddeni {
+			display: none;
+		}
+
+		.modali {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 70%;
+
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			padding: 6rem;
+			border-radius: 5px;
+			box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+			z-index: 10;
+		}
+
+		.overlayi {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.6);
+			backdrop-filter: blur(3px);
+			z-index: 5;
+		}
+	</style>
+	<style>
+		body {
+			color: black !important;
+		}
+
+		.stretch-card>.card {
+			width: 100%;
+			min-width: 100%
+		}
+
+		.flex {
+			-webkit-box-flex: 1;
+			-ms-flex: 1 1 auto;
+			flex: 1 1 auto;
+		}
+
+		@media (max-width:991.98px) {
+			.padding {
+				padding: 1.5rem;
+			}
+		}
+
+		@media (max-width:767.98px) {
+			.padding {
+				padding: 1rem;
+			}
+		}
+
+		.padding {
+			padding: 3rem;
+		}
+
+		.card {
+			box-shadow: none;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			-ms-box-shadow: none;
+		}
+
+		.card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 1px solid #3da5f;
+			border-radius: 0;
+		}
+
+		.card .card-block {
+			padding: 1.25rem;
+		}
+
+		h6 {
+			font-size: 16px !important;
+		}
+
+		.text-c-green {
+			color: #2ed8b6 !important;
+		}
+
+		.m-l-10 {
+			margin-left: 10px;
+		}
+
+		.proj-progress-card .progress {
+			height: 6px;
+			overflow: visible;
+			margin-bottom: 10px;
+		}
+
+		.proj-progress-card .progress .progress-bar {
+			position: relative
+		}
+
+		.progress .progress-bar {
+			height: 100%;
+			color: inherit;
+		}
+
+		.bg-c-red {
+			background: #FF5370 !important;
+		}
+
+		.proj-progress-card .progress .progress-bar.bg-c-red:after {
+			border: 3px solid #FF5370 !important;
+		}
+
+		.proj-progress-card .progress .progress-bar:after {
+			content: "";
+			background: #fff;
+			position: absolute;
+			right: -6px;
+			top: -4px;
+			border-radius: 50%;
+			width: 15px;
+			height: 15px;
+		}
+
+		.bg-c-blue {
+			background: #4099ff !important;
+		}
+
+		.proj-progress-card .progress .progress-bar.bg-c-blue:after {
+			border: 3px solid #4099ff !important;
+		}
+
+		.proj-progress-card .progress .progress-bar.bg-c-green:after {
+			border: 3px solid #2ed8b6 !important;
+		}
+
+		.bg-c-green {
+			background: #2ed8b6 !important;
+		}
+
+		.bg-c-yellow {
+			background: #FFB64D !important;
+		}
+
+		.proj-progress-card .progress .progress-bar.bg-c-yellow:after {
+			border: 3px solid #FFB64D !important;
+		}
+
+		.m-b-30 {
+			margin-bottom: 30px;
+		}
+
+		.text-c-red {
+			color: #FF5370 !important;
+		}
+
+
+		@media only screen and (max-width: 1000px) {
+			.modali {
+			position: absolute;
+			top: 50%;
+			left: 10%;
+			transform: translate(10%, -50%);
+			width: 70%;
+
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			padding: 2rem;
+			border-radius: 5px;
+			box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+			z-index: 10;
+		}
+		#enpar{
+			font-size: 24px;
+		}
+		h1 {
+			font-size: 1.6rem !important;
+			margin-bottom: 2rem !important;
+		}
+
+		p {
+			font-size: 1.4rem !important;
+		}
+		.close-modali {
+			position: absolute;
+			right: 0;
+			font-size: 40px;
+			margin-top: -20px;
+			color: #333;
+			cursor: pointer;
+			border: none;
+			background: none;
+		}
+}
+@media only screen and (max-width: 800px) {
+			.modali {
+			position: absolute;
+			top: 50%;
+			left: 14%;
+			transform: translate(13%, -50%);
+			width: 60%;
+
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			padding: 1rem;
+			font-size: 18px;
+			border-radius: 5px;
+			box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+			z-index: 10;
+		}
+		h1 {
+			font-size: 1.6rem !important;
+			margin-bottom: 2rem !important;
+		}
+		#enpar{
+			font-size: 20px !important;
+		}
+
+		p {
+			font-size: 1.4rem !important;
+		}
+		.close-modali {
+			position: absolute;
+			font-size: 40px;
+			right: 0;
+			margin-top: -20px;
+			color: #333;
+			cursor: pointer;
+			border: none;
+			background: none;
+		}
+}
+@media only screen and (max-width: 660px) {
+			.modali {
+			position: absolute;
+			top: 50%;
+			left: 12%;
+			transform: translate(13%, -50%);
+			width: 65%;
+
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			padding: 1rem;
+			font-size: 18px;
+			border-radius: 5px;
+			box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+			z-index: 10;
+		}
+		h1 {
+			font-size: 1.4rem !important;
+			margin-bottom: 1.4rem !important;
+		}
+		#enpar{
+			font-size: 18px !important;
+		}
+
+		p {
+			font-size: 1.2rem !important;
+		}
+		.close-modali {
+			position: absolute;
+			right: 0;
+			font-size: 38px;
+			margin-top: -26px;
+			color: #333;
+			cursor: pointer;
+			border: none;
+			background: none;
+		}
+}
+
+@media only screen and (max-width: 550px) {
+			.modali {
+			position: absolute;
+			top: 40%;
+			left: 4%;
+			transform: translate(30%, -30%);
+			width: 60%;
+
+			background-image: linear-gradient(#FF8F1C, #fff, #509e2F);
+			padding: 0.6rem;
+			font-size: 16px;
+			border-radius: 5px;
+			box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+			z-index: 20;
+		}
+		h1 {
+			font-size: 1.4rem !important;
+			margin-bottom: 1.6rem !important;
+		}
+		#enpar{
+			font-size: 16px !important;
+		}
+
+		p {
+			font-size: 1.2rem !important;
+		}
+		.close-modali {
+			position: absolute;
+			right: 0;
+			font-size: 30px;
+			margin-left: 30px !important;
+			margin-top: -30px;
+			color: #333;
+			cursor: pointer;
+			border: none;
+			background: none;
+		}
+}
+	</style>
+	
 
 	<body style="background-color:white;">
+		<div class="modali">
+			<button class="close-modali">&times;</button>
+			<h1 style="text-align: center;">बधाई हो पार्टी B 🎉🎊</h1>
+			<p style="color: black;">
+				प्रिय नागरिक आपने बहुमत में भाग बी का चयन किया है, सभी को बधाई,<br><br>अब हमारे पास सत्तारूढ़ पार्टी के
+				रूप में पार्टी बी है । 🙏
+				<hr>
+				<br>
+			<h1  style="text-align: center;">Congratulations Party B 🎉🎊</h1>
+			<span id="enpar">Dear Citizens You have choosed Party B in majority , Congratulations to
+				everyone , We now have Party B as ruling Party. 🙏</span>
+
+			</p>
+		</div>
+		<div class="overlayi hiddeni"></div>
+
+
+
+
+		
 		<h1 style="font-size: 122px;text-align: center; color: black;">Election Poll Results</h1>
 		<div class="container">
-		<div id="canvas-holder" style="width:90%; text-align: center; margin-top: 50px;">
-			
-			<script src="/javascripts/final-result.js"></script>
-			<canvas id="chart-area"></canvas>
+			<div id="canvas-holder" style="width:90%; text-align: center; margin-top: 50px;">
+
+				<script src="/javascripts/final-result.js"></script>
+				<canvas id="chart-area"></canvas>
+			</div>
 		</div>
-	</div>
+		<h1 style="font-size: 122px;text-align: center; color: black;">State Wise Poll Analysis</h1>
 		<div class="container" style="margin-top: 40px;">
 			<div class="row">
 			  <!-- <div class="col-sm"> -->
@@ -75,9 +415,9 @@
 				</div>
 			  </div> -->
 			</div>
-		  </div>
+		</div>
 		<!-- <div class="row">
-			<div class="col-sm">
+			<div class="col lg-4 md-6 col-sm">
 				
 				<div >
 					
@@ -89,14 +429,329 @@
 			</div>
 
 		</div> -->
-		
-		
-	
-	</body >
 
-	</html >
+		<h1 style="text-align: center;">Winning Party Report </h1>
+		<div class="page-content container" id="page-content">
+			<div class="padding">
+				<div class="row container d-flex justify-content-center">
+					<div class="col-xl-12">
+						<div class="card proj-progress-card">
+							<div class="card-block">
+								<div class="row">
+									<div class="col-xl-3 col-md-6">
+										<h6>Party A</h6>
+										<h5 class="m-b-30 f-w-700">70/90<span class="text-c-green m-l-10">77.77%</span>
+										</h5>
+										<div class="progress">
+											<div class="progress-bar bg-c-red" style="width:77.77%"></div>
+										</div>
+									</div>
+									<div class="col-xl-3 col-md-6">
+										<h6>Part 2</h6>
+										<h5 class="m-b-30 f-w-700">10/90<span class="text-c-red m-l-10">11.11%</span>
+										</h5>
+										<div class="progress">
+											<div class="progress-bar bg-c-blue" style="width:11.11%"></div>
+										</div>
+									</div>
+									<div class="col-xl-3 col-md-6">
+										<h6>Party C</h6>
+										<h5 class="m-b-30 f-w-700">3/90<span class="text-c-green m-l-10">3.33%</span>
+										</h5>
+										<div class="progress">
+											<div class="progress-bar bg-c-green" style="width:3.33%"></div>
+										</div>
+									</div>
+									<div class="col-xl-3 col-md-6">
+										<h6>Party D</h6>
+										<h5 class="m-b-30 f-w-700">7/90<span class="text-c-green m-l-10">7.77%</span>
+										</h5>
+										<div class="progress">
+											<div class="progress-bar bg-c-yellow" style="width:7.77%"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-			
+
+
+		<script>
+			const modal = document.querySelector('.modali');
+			const overlay = document.querySelector('.overlayi');
+			const btnCloseModal = document.querySelector('.close-modali');
+			// const btnsOpenModal = document.querySelectorAll('.show-modal');
+
+			window.onload = function () {
+				openModal();
+			}
+			const openModal = function () {
+				k(80,0);
+				modal.classList.remove('hiddeni');
+				overlay.classList.remove('hiddeni');
+			};
+
+			const closeModal = function () {
+				modal.classList.add('hiddeni');
+				overlay.classList.add('hiddeni');
+			};
+
+			btnCloseModal.addEventListener('click', closeModal);
+			overlay.addEventListener('click', closeModal);
+			document.addEventListener('keydown', function (e) {
+				// console.log(e.key);
+
+				if (e.key === 'Escape' && !modal.classList.contains('hiddeni')) {
+					closeModal();
+				}
+			});
+		</script>
+
+
+
+		<script>
+
+			const k = function (meriballs,stopiii) {
+				/*
+	* https://gist.github.com/trentmwillis/2199d6d191000b8d8f40#gistcomment-2749653
+	* Modified javascript to make rain of corianders... the effect is very amazing!
+	*/
+
+				(function () {
+					var corianders = [], moveAngle = 0, animationInterval;
+					var browserWidth = document.body.clientWidth;
+					var browserHeight = window.innerHeight;
+					/**
+					 * Generates a random color.
+					 * @method getRandomColor
+					 * @return {Color}
+					 */
+					function getRandomColor() {
+						var letters = '0123456789ABCDEF';
+						var color = '#';
+						for (i = 0; i < 6; i++) {
+							color += letters[Math.floor(Math.random() * 16)];
+						}
+						return color;
+					}
+					/**
+					 * Generates a random number between the min and max (inclusive).
+					 * @method getRandomNumber
+					 * @param {Number} min
+					 * @param {Number} max
+					 * @return {Number}
+					 */
+					function getRandomNumber(min, max) {
+						return Math.floor(Math.random() * (max - min + 1)) + min;
+					}
+					/**
+					 * Creates a new coriander div and returns it.
+					 * @method createCoriander
+					 * @return {HTMLElement}
+					 */
+					function createCoriander() {
+						var el = document.createElement('div'), style = el.style;
+						style.borderRadius = '0px';
+						style.border = getRandomNumber(4, 8) + 'px solid ' + getRandomColor();
+						var degrees = getRandomNumber(1, 360);
+						style.WebkitTransform = 'rotate(' + degrees + 'deg)';
+						style.msTransform = 'rotate(' + degrees + 'deg)';
+						style.transform = 'rotate(' + degrees + 'deg)';
+						style.position = 'fixed';
+						style.zIndex = '999999';
+						style.opacity = '0.9';
+						style.filter = 'alpha(opacity=90)';
+						style.boxShadow = '0 0 2px rgba(255,255,255,0.8)';
+						style.top = getRandomNumber(0, browserHeight) + 'px';
+						style.left = getRandomNumber(0, browserWidth) + 'px';
+						return el;
+					}
+					/**
+					 * Calls the moveCoriander method for each of the corianders in the cache.
+					 * @method moveCorianders
+					 * @return {Void}
+					 */
+					function moveCorianders() {
+						var l = corianders.length, i;
+						moveAngle += 0.01;
+						for (i = 0; i < l; i++) {
+							moveCoriander(corianders[i]);
+						}
+					}
+					/**
+					 * Moves an individual coriander element using some simple math.
+					 * @method moveCoriander
+					 * @param {HTMLElement} el
+					 * @return {Void}
+					 */
+					function moveCoriander(el) {
+						var style = el.style, height = browserHeight, radius, top;
+						radius = parseInt(style.border, 10);
+						top = parseInt(style.top, 10);
+						top += Math.cos(moveAngle) + 1 + radius / 2;
+						if (top > height) {
+							resetCoriander(el);
+						} else {
+							style.top = top + 'px';
+						}
+					}
+					/**
+					 * Puts the coriander back at the top in a random horizontal start position.
+					 * @method resetCoriander
+					 * @param {HTMLElement} el
+					 * @return {Void}
+					 */
+					function resetCoriander(el) {
+						var style = el.style;
+						style.top = '0px';
+						style.left = getRandomNumber(0, browserWidth) + 'px';
+					}
+					/**
+					 * The kick-off method. Asks how many corianders to make and then makes them!
+					 * @method setup
+					 * @return {Void}
+					 */
+					function setup() {
+						var number = prompt('How many corianders would you like?'), particle, i;
+						// var number = 150, particle, i;
+						// Setup snow particles
+						for (i = 0; i < number; i++) {
+							particle = corianders[i] = createCoriander();
+							document.body.appendChild(particle);
+						}
+						// Set animation intervals
+						animationInterval = setInterval(moveCorianders, 33);
+					}
+					// setup();
+					
+				}());
+			}
+
+
+		</script>
+
+		<script>
+
+			/*
+* https://gist.github.com/trentmwillis/2199d6d191000b8d8f40#gistcomment-2749653
+* Modified javascript to make rain of Christmas balls... the effect is amazing!
+*/
+
+(function() {
+  var christmasballs = [], moveAngle = 0, animationInterval;
+  var browserWidth = document.body.clientWidth;
+  var browserHeight = window.innerHeight;
+  /**
+   * Generates a random number between the min and max (inclusive).
+   * @method getRandomNumber
+   * @param {Number} min
+   * @param {Number} max
+   * @return {Number}
+   */
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  /**
+   * Generates a random color.
+   * @method getRandomColor
+   * @return {Color}
+   */
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (i=0; i<6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  /**
+   * Creates a new christmasball div and returns it.
+   * @method createChristmasball
+   * @return {HTMLElement}
+   */
+  function createChristmasball() {
+    var el = document.createElement('div'), style = el.style;
+    style.borderRadius = '100%';
+    style.border = getRandomNumber(4, 8) + 'px solid ' + getRandomColor();
+    style.position = 'fixed';
+    style.zIndex = '999999';
+    style.opacity = '0.9';
+    style.filter = 'alpha(opacity=90)';
+    style.top = getRandomNumber(0, browserHeight) + 'px';
+    style.left = getRandomNumber(0, browserWidth) + 'px';
+    return el;
+  }
+  /**
+   * Calls the moveChristmasball method for each of the christmasballs in the cache.
+   * @method moveChristmasballs
+   * @return {Void}
+   */
+  function moveChristmasballs() {
+    var l = christmasballs.length, i;
+    moveAngle += 0.01;
+    for (i=0; i<l; i++) {
+      moveChristmasball(christmasballs[i]);
+    }
+  }
+  /**
+   * Moves an individual christmasball element using some simple math.
+   * @method moveChristmasball
+   * @param {HTMLElement} el
+   * @return {Void}
+   */
+  function moveChristmasball(el) {
+    var style = el.style, height = browserHeight, radius, top;
+    radius = parseInt(style.border, 10);
+    top = parseInt(style.top, 10);
+    top += Math.cos(moveAngle) + 1 + radius/2;
+    if (top > height) {
+      resetChristmasball(el);
+    } else {
+      style.top = top + 'px';
+    }
+  }
+  /**
+   * Puts the christmasball back at the top in a random horizontal start position.
+   * @method resetChristmasball
+   * @param {HTMLElement} el
+   * @return {Void}
+   */
+  function resetChristmasball(el) {
+    var style = el.style;
+    style.top = '0px';
+    style.left = getRandomNumber(0, browserWidth) + 'px';
+  }
+  /**
+   * The kick-off method. Asks how many christmasballs to make and then makes them!
+   * @method setup
+   * @return {Void}
+   */
+  function setup() {
+    var number = prompt('How many Christmas balls would you like?'), particle, i;
+    // var number = 150, particle, i;
+    // Setup snow particles
+    for (i=0; i<number; i++) {
+      particle = christmasballs[i] = createChristmasball();
+      document.body.appendChild(particle);
+    }
+    // Set animation intervals
+    animationInterval = setInterval(moveChristmasballs, 33);
+  }
+  setup();
+}());
+
+		</script>
+
+
+	</body>
+
+	</html>
+
+
 
 
 	<% include footer.ejs %>

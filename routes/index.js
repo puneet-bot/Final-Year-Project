@@ -10,7 +10,7 @@ var twilio = require("twilio");
 var upload = multer({
 	dest: 'uploads/'
 });
-var const_date = 1622986205;
+var const_date = 1622987205;
 
 var eligibleVoters = {
 	'1': { name: 'user1', age: '29' ,contact: "+918800880798" },
@@ -425,5 +425,9 @@ router.get('/Candidates',function(req,res){
 router.get('/refer',function(req,res){
 	
 	res.render('refer');
+});
+router.get('/cartoon',function(req,res){
+	
+	res.render('cartoon');
 });
 module.exports = router;
