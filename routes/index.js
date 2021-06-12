@@ -121,43 +121,74 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-router.get('/votecandidate', function (req, res, next) {
 
-	if (!req.cookies.votePayload) {
-		return res.redirect('/vote');
+router.post('/verifyOTP', upload.any(), function (req, res, next) {
+	if(Math.floor(Date.now() / 1000) >= const_date){
+		if (!req.cookies.votePayload) {
+			return res.redirect('/vote');
+		}
+	
+		console.log(req.cookies.votePayload.otp)
+		console.log(req.body.otp)
+		if(req.cookies.votePayload.otp === req.body.otp){
+    
+		
+			
+		var id = req.cookies.votePayload.id;
+		var constituency = req.cookies.votePayload.constituency;
+		var name = req.cookies.votePayload.name;
+		var aadhaar = req.cookies.votePayload.aadhaar;
+
+		req.app.db.models.Voter.findById(id, function (err, data) {
+			data.isValid = true;
+			data.save()
+		})
+		
+		res.clearCookie('votePayload');
+	
+		req.app.db.models.Candidate.find({
+			constituency: constituency
+		}, function (err, data) {
+			// console.log("data =>",data);
+			// var temp = [];
+			// candidatedata.forEach(element => {
+			// 	if(element.constituency == constituency)
+			//     temp.push(element);
+			// });
+			if (err) {
+				console.log(err);
+				return next(err);
+			}
+			//console.log("temp ->",temp);
+			res.render('votecandidate', {
+				JWTData: req.JWTData,
+				data: data,
+				id: id,
+				constituency: constituency,
+				name: name,
+				aadhaar: aadhaar
+			});
+		});
+	
+		
+	}
+	else{
+		return res.render('message', {
+			message: 'WRONG OTP!!',
+			JWTData: req.JWTData
+		});
+	}
+	}
+	else{
+		return res.render('message', {
+			message: 'VOTING IS NOT STARTED YET!!!',
+			JWTData: req.JWTData
+		});
 	}
 
-	var id = req.cookies.votePayload.id;
-	var constituency = req.cookies.votePayload.constituency;
-	var name = req.cookies.votePayload.name;
-	var aadhaar = req.cookies.votePayload.aadhaar;
-
-	res.clearCookie('votePayload');
-
-	req.app.db.models.Candidate.find({
-		constituency: constituency
-	}, function (err, data) {
-		console.log("data =>",data);
-		// var temp = [];
-		// candidatedata.forEach(element => {
-		// 	if(element.constituency == constituency)
-        //     temp.push(element);
-		// });
-		if (err) {
-			console.log(err);
-			return next(err);
-		}
-		//console.log("temp ->",temp);
-		res.render('votecandidate', {
-			JWTData: req.JWTData,
-			data: data,
-			id: id,
-			constituency: constituency,
-			name: name,
-			aadhaar: aadhaar
-		});
-	});
 });
+
+
 
 router.get('/vote', function (req, res, next) {
 	if(Math.floor(Date.now() / 1000) >= const_date){
@@ -350,7 +381,7 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 						OTP += digits[Math.floor(Math.random() * 10)];
 					}
 					data.otp = parseFloat(OTP)
-					// data.save()
+					data.save()
 					/****************************************************************/
 
 					/**************************Send Otp To The Registered Number******************************/
@@ -370,20 +401,22 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 					.catch(err => console.log(err));
 
 					/******************************************************************************************/
-					data.isValid = true;
-			        data.save();
-					var voteUrl = '/votecandidate';
 
 									var votePayload = {
 										id: id,
 										constituency: data.constituency,
 										name: data.name,
-										aadhaar: data.aadhaar
+										aadhaar: data.aadhaar,
+										otp:OTP
 									}
 
 									res.cookie('votePayload', votePayload);
 
-									return res.redirect(voteUrl);
+					// 				return res.redirect(voteUrl);
+
+					res.render('verifyOTP', {
+						JWTData: req.JWTData,
+					});
 				}
 			});
 		};
