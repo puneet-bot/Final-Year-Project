@@ -1,4 +1,26 @@
 
+ function returnD(){
+    var voteArr = [];
+    var totalVotes = 0;
+    var percentage = [];
+    var digits = '0123456789';
+	var OTP = '';				
+    for(var i =0; i < 21 ; i++){
+        OTP += digits[Math.floor(Math.random() * 10)];
+        voteArr.push(parseFloat(OTP));
+        totalVotes += parseFloat(OTP);
+        OTP = ''
+    }
+    for(var i =0; i < 21 ; i++){
+        percentage.push((voteArr[i]/totalVotes).toFixed(2) * 100)
+    }
+    console.log(voteArr);
+    console.log(totalVotes);
+    console.log(percentage)
+}
+
+returnData()
+
 
 export function returnData(){
     var arr = [];

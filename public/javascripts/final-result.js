@@ -88,7 +88,7 @@ var electionResults = getElectionResults()
 				responsive: true,
 				legend: {
 					display: true,
-					position: "right",
+					position: "center",
 					labels: {
 						fontFamily: "Comic Sans MS",
 						boxWidth: 10,

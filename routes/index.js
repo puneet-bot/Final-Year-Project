@@ -12,6 +12,76 @@ var upload = multer({
 });
 var const_date = 1622987205;
 
+
+
+
+
+/****************************************************************************************************************/
+
+
+var Web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+
+
+var VotingContract = web3.eth.contract(abi);
+// In your nodejs console, execute deployedContract.address to get the address at which the contract is deployed and change the line below to use your deployed address
+var contractInstance = VotingContract.at('0xd6191f27cd71c3f69ee73dfd992b3c21e0cda119');
+
+var candidates = {
+	"A": "candidate-1",
+	"B": "candidate-2",
+	"C": "candidate-3",
+	"D": "candidate-4",
+	"E": "candidate-5",
+	"F": "candidate-6",
+	'G': "candidate-7",		
+	'H': "candidate-8",
+	'I': "candidate-9",
+	'J': "candidate-10",
+	'K': "candidate-11",
+	'L': "candidate-12",
+	'M': "candidate-13",
+	'N': "candidate-14",
+	'O': "candidate-15",
+	'P': "candidate-16",
+	'Q': "candidate-17",
+	'R': "candidate-18",
+	'S': "candidate-19",
+	'T': "candidate-20",
+	'U': "candidate-21",
+  }
+
+
+function getElectionResults() {
+	var voteResults = {};
+	var candidateNames = Object.keys(candidates);
+	for (var i = 0; i < candidateNames.length; i++) {
+	  var name = candidateNames[i];
+	  var val = contractInstance.totalVotesFor.call(name).toLocaleString();
+	  voteResults[name] = val;
+	}
+	console.log(voteResults)
+	return voteResults;
+  }
+
+/****************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var eligibleVoters = {
 	'1': { name: 'user1', age: '29' ,contact: "+918800880798" },
 	'2': { name: 'user2', age: '12' ,contact: "+918800880798" },
@@ -211,17 +281,58 @@ router.get('/register', function (req, res, next) {
 });
 
 router.get('/results', function (req, res, next) {
+	var results = getElectionResults()
+	var voteArr = Object.values(results);
+	var percentage = []
+	var totalVotes = 0;
+	voteArr.forEach(element => {
+		totalVotes += parseFloat(element)
+	});
+
+	for(var i =0;i<voteArr.length;i++)
+    percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100)
+
+	// voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
+	// totalVotes = 98
+	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
 	if(Math.floor(Date.now() / 1000) >= const_date){
 		res.render('results', {
-			JWTData: req.JWTData
+			JWTData: req.JWTData,
+			voteArr:voteArr,
+			totalVotes:totalVotes,
+			percentage:percentage
 		});
 	}
 	else{
 		return res.render('message', {
 			message: 'Voting Phase Not Yet Started!!',
-			JWTData: req.JWTData
+			JWTData: req.JWTData,
 		});
 	}
+})
+
+router.get('/noOfVotesToCandidateArr', async function (req, res, next) {
+	var results = getElectionResults()
+	var voteArr = Object.values(results);
+	var percentage = [];
+	var totalVotes = 0;
+	voteArr.forEach(element => {
+		totalVotes += parseFloat(element)
+	});
+
+	// voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
+	// totalVotes = 98
+	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
+    
+	for(var i =0;i<voteArr.length;i++)
+    percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100) 
+
+	var data = {
+		voteArr:voteArr,
+		totalVotes:totalVotes,
+		percentage:percentage
+	}
+	res.json(data)
 })
 
 
