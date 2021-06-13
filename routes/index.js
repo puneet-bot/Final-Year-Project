@@ -11,6 +11,7 @@ var upload = multer({
 	dest: 'uploads/'
 });
 var const_date = 1622987205;
+// var  fetch=require('node-fetch');
 
 
 
@@ -570,8 +571,22 @@ router.get('/refer',function(req,res){
 	
 	res.render('refer');
 });
-router.get('/cartoon',function(req,res){
+router.get('/gallery',function(req,res){
 	
-	res.render('cartoon');
+	res.render('gallery');
 });
+
+
+// router.get('/news', async function (req, res, next) {
+    
+// 	fetch('https://newsapi.org/v2/everything?q=voting&from=2021-05-13&sortBy=publishedAt&apiKey=360203ef3b92414491946ba8e59c0dfb').then(function (data) {
+// 		return data.json();
+// 	  }).then(function(myJson){
+// 		  console.log(myJson)
+// 		  res.json(myJson)
+// 	  })
+// });
+
+
+
 module.exports = router;
