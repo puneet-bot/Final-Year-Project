@@ -1590,16 +1590,20 @@
 	<style>
 		.darkened-image {
 			background: no-repeat;
-			background-image: url('https://img.wallpapersafari.com/desktop/1536/864/14/86/UZawYj.jpg');
+			background-image: url('/images/BackMain-logo/lap-1.jpg');
 	</style>
 	<script>
 		window.onload = function () {
 			console.log("heelo");
      // Array of Images
       var backgroundImg=[
+		  "/images/BackMain-logo/lap-2.jpg",
+		  "/images/BackMain-logo/lap-3.jpg",
+		  "/images/BackMain-logo/lap-4.jpg",
+		  "/images/BackMain-logo/lap-5.jpg",
                         ]
 
-        setInterval(changeImage, 10000);
+        setInterval(changeImage, 3000);
 		imgss.style.background= "no-repeat";
        function changeImage() {   
         var i = Math.floor((Math.random() * 3));
@@ -1666,9 +1670,7 @@
 	<section class="main-headersz" >
 		<img class="darkened-image" >
 	</section>
-	<section style="margin-top: 0px;background-color: gold;">
-	<h1 style="color: black;background-color: gold; font-size: 48px;" >लोकतंत्र की है ये पुकार करो अपना अमूल्य वोट देकर , अपने मतदान का अधिकार। <br></h1>
-	</section>
+
 	<section id="projects">
 		<div class="projects container">
 			<div class="projects-header">
@@ -1751,6 +1753,9 @@
 
 
 	<section>
+		<div class="projects-header">
+				<h1 class="section-title">Galler<span>y</span></h1>
+			</div>
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="card" style="width: 100%">
@@ -1773,9 +1778,12 @@
 						alt="Card image cap">
 				</div>
 			</div>
-
+			<div class="col-sm-12" style=" margin-top:30px; text-align: center; ">
+					
+					<a class="btn btn-danger"  style="text-align:center;font-size: 40px;" href="/cartoon"> <i class="fa fa-plus-square" style="font-size: 80px;"></i> Gallery</a>
+			</div>
 		</div>
-
+		
 	</section>
 	<script>
 		
