@@ -537,10 +537,9 @@
 				रूप में पार्टी बी है । 🙏 -->
 				<hr>
 				<br>
-			<h1  style="text-align: center;">Congratulations Candidate B 🎉🎊</h1>
-			<span id="enpar">Dear Voters You have choosed Candidate B in majority , Congratulations to
-				everyone , We now have Candidate B as winner. 🙏</span>
-
+			<h1  style="text-align: center;">Congratulations <%=winner%> 🎉🎊</h1>
+			<span id="enpar">Dear Voters You have choosed  <%=winner%> in majority , Congratulations to
+				everyone , We now have <%=winner%> as winner. 🙏</span>
 			</p>
 		</div>
 		<div class="overlayi hiddeni"></div>
@@ -913,9 +912,15 @@
 			const overlay = document.querySelector('.overlayi');
 			const btnCloseModal = document.querySelector('.close-modali');
 			// const btnsOpenModal = document.querySelectorAll('.show-modal');
-
+            
+			fetch("http://localhost:3000/noOfVotesToCandidateArr").then(function (res) {
+           return res.json();
+           }).then(function(myJson){
+			   if(myJson.winner !== null)
+			   openModal()
+		   })
 			window.onload = function () {
-				openModal();
+				closeModal();
 			}
 			const openModal = function () {
 				k(80,0);
