@@ -301,9 +301,9 @@ router.get('/results', function (req, res, next) {
 	
 	
 
-	voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
-	totalVotes = 98
-	percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
+	// voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
+	// totalVotes = 98
+	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
 
 
 	var winner = voteArr.reduce(function(a, b) { return Math.max(a, b); });
@@ -353,9 +353,9 @@ router.get('/noOfVotesToCandidateArr', async function (req, res, next) {
 		totalVotes += parseFloat(element)
 	});
 
-	voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
-	totalVotes = 98
-	percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
+	// voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
+	// totalVotes = 98
+	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
     
 	for(var i =0;i<voteArr.length;i++){
 		if(parseFloat(totalVotes) !== 0)
