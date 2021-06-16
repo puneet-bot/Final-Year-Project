@@ -17,4 +17,3 @@
 ## #7 `Copy this Address and paste it into public/javascripts/blockchain.js file at Voting.contract and also change it at routes/index.js at Voting.contract`
 
 ## #8 `npm run start`
-Watch video @ https://youtu.be/9aimIS2vP98
