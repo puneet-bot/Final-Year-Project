@@ -14,9 +14,6 @@
     for(var i =0; i < 21 ; i++){
         percentage.push((voteArr[i]/totalVotes).toFixed(2) * 100)
     }
-    console.log(voteArr);
-    console.log(totalVotes);
-    console.log(percentage)
 }
 
 returnData()

@@ -11,7 +11,7 @@ var upload = multer({
 	dest: 'uploads/'
 });
 var const_date = 1622987205;
-var end_date = 1622987205
+var end_date = 1722987205
 // var  fetch=require('node-fetch');
 
 
@@ -29,7 +29,7 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"by
 
 var VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute deployedContract.address to get the address at which the contract is deployed and change the line below to use your deployed address
-var contractInstance = VotingContract.at('0xd6191f27cd71c3f69ee73dfd992b3c21e0cda119');
+var contractInstance = VotingContract.at('0x5790b9f0032054888c37d4f1e1fbed3d7653106f'); // change new contract address here
 
 var candidates = {
 	"A": "candidate-1",
@@ -64,7 +64,6 @@ function getElectionResults() {
 	  var val = contractInstance.totalVotesFor.call(name).toLocaleString();
 	  voteResults[name] = val;
 	}
-	console.log(voteResults)
 	return voteResults;
   }
 
@@ -200,8 +199,6 @@ router.post('/verifyOTP', upload.any(), function (req, res, next) {
 			return res.redirect('/vote');
 		}
 	
-		console.log(req.cookies.votePayload.otp)
-		console.log(req.body.otp)
 		if(req.cookies.votePayload.otp === req.body.otp){
     
 		
@@ -516,7 +513,6 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 		}
 
 		qr.callback = function (err, value) {
-			console.log(value+"----------------------------------------------------");
 			if (err) {
 				console.error(err);
 				// TODO handle error
