@@ -11,6 +11,7 @@ var upload = multer({
 	dest: 'uploads/'
 });
 var const_date = 1622987205;
+var end_date = 1722987205
 // var  fetch=require('node-fetch');
 
 
@@ -28,7 +29,7 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"by
 
 var VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute deployedContract.address to get the address at which the contract is deployed and change the line below to use your deployed address
-var contractInstance = VotingContract.at('0xd6191f27cd71c3f69ee73dfd992b3c21e0cda119');
+var contractInstance = VotingContract.at('0x5790b9f0032054888c37d4f1e1fbed3d7653106f'); // change new contract address here
 
 var candidates = {
 	"A": "candidate-1",
@@ -63,7 +64,6 @@ function getElectionResults() {
 	  var val = contractInstance.totalVotesFor.call(name).toLocaleString();
 	  voteResults[name] = val;
 	}
-	console.log(voteResults)
 	return voteResults;
   }
 
@@ -199,8 +199,6 @@ router.post('/verifyOTP', upload.any(), function (req, res, next) {
 			return res.redirect('/vote');
 		}
 	
-		console.log(req.cookies.votePayload.otp)
-		console.log(req.body.otp)
 		if(req.cookies.votePayload.otp === req.body.otp){
     
 		
@@ -290,19 +288,50 @@ router.get('/results', function (req, res, next) {
 		totalVotes += parseFloat(element)
 	});
 
-	for(var i =0;i<voteArr.length;i++)
-    percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100)
+	for(var i =0;i<voteArr.length;i++){
+		if(parseFloat(totalVotes) !== 0)
+		percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100)
+		else
+		percentage.push(0)
+	}
+	
+	
+	
 
 	// voteArr = [7, 6, 5, 4, 4, 2, 9,8, 2, 3, 1, 4, 2, 9,4, 9, 3, 1, 6, 6, 3]
 	// totalVotes = 98
 	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
+
+
+	var winner = voteArr.reduce(function(a, b) { return Math.max(a, b); });
+	var keyArr = Object.keys(results)
+	var winnerArr = [];
+	for(var i = 0;i<voteArr.length ;i++)
+	if(parseFloat(voteArr[i]) === winner)
+	winnerArr.push(keyArr[i])
+
+	
 	if(Math.floor(Date.now() / 1000) >= const_date){
+
+		if(winnerArr.length !== 0)
 		res.render('results', {
 			JWTData: req.JWTData,
 			voteArr:voteArr,
-			totalVotes:totalVotes,
-			percentage:percentage
+		totalVotes:totalVotes,
+		percentage:percentage,
+		winner:winnerArr,
+		max:winner
 		});
+	else
+	data = {
+		JWTData: req.JWTData,
+		voteArr:voteArr,
+		totalVotes:totalVotes,
+		percentage:percentage,
+		winner:winnerArr,
+		max:null
+	}
+		
 	}
 	else{
 		return res.render('message', {
@@ -325,13 +354,33 @@ router.get('/noOfVotesToCandidateArr', async function (req, res, next) {
 	// totalVotes = 98
 	// percentage = [7,6,5,4,4,2,9,8,2,3,1,4,2,9,4,9,3,1,6,6,3]
     
-	for(var i =0;i<voteArr.length;i++)
-    percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100) 
-
-	var data = {
+	for(var i =0;i<voteArr.length;i++){
+		if(parseFloat(totalVotes) !== 0)
+		percentage.push((parseFloat(voteArr[i])/parseFloat(totalVotes)) * 100)
+		else
+		percentage.push(0)
+	}
+	var winner = voteArr.reduce(function(a, b) { return Math.max(a, b); });
+	var keyArr = Object.keys(results)
+	var winnerArr = [];
+	for(var i = 0;i<voteArr.length ;i++)
+	if(parseFloat(voteArr[i]) === winner)
+	winnerArr.push(keyArr[i])
+	var data;
+	if(winnerArr.length !== 0 && Math.floor(Date.now() / 1000) >= end_date)
+	data = {
 		voteArr:voteArr,
 		totalVotes:totalVotes,
-		percentage:percentage
+		percentage:percentage,
+		winner:winnerArr,
+		max:winner
+	}
+	else
+	data = {
+		voteArr:voteArr,
+		totalVotes:totalVotes,
+		percentage:percentage,
+		winner:null,
 	}
 	res.json(data)
 })
@@ -464,7 +513,6 @@ router.post('/verifyvoter', upload.any(), function (req, res, next) {
 		}
 
 		qr.callback = function (err, value) {
-			console.log(value+"----------------------------------------------------");
 			if (err) {
 				console.error(err);
 				// TODO handle error

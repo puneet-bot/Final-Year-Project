@@ -48,8 +48,6 @@ function runFunc() {
   });
    }
   })
-  // var electionResults = getElectionResults()
-  // console.log("results",electionResults)
   var fetchVotes = fetch("http://localhost:3000/noOfVotesToCandidateArr").then(function (res) {
     return res.json();
   }).then(function(myJson){

@@ -9,7 +9,6 @@ router.get('/', function (req, res, next) {
 		req.app.db.models.Voter.find({}, {
 			
 		}, function (err, data) {
-			console.log(data);
 			if (err) {
 				console.log(err);
 				return next(err);
@@ -20,7 +19,6 @@ router.get('/', function (req, res, next) {
 					console.log(err);
 					return next(err);
 				}
-				console.log(candidates)
 
 				return res.render('admin', {
 					JWTData: req.JWTData,

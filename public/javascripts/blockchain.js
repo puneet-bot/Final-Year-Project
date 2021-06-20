@@ -6,7 +6,7 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"candidate","type":"by
 
 var VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute deployedContract.address to get the address at which the contract is deployed and change the line below to use your deployed address
-var contractInstance = VotingContract.at('0x815f4a591a6c0fc0adeb509426257d728e6aaa3f');
+var contractInstance = VotingContract.at('0x5790b9f0032054888c37d4f1e1fbed3d7653106f'); //change contract address here
 
 var candidates = {
   "A": "candidate-1",
@@ -33,7 +33,6 @@ var candidates = {
 }
 
 function voteForCandidate(id) {
-  console.log(id)
   var candidateName = document.getElementById("result").value;
   console.log("vote candidate =>",candidateName)
   var voteflag = confirm("Confirm Vote");
@@ -42,38 +41,13 @@ function voteForCandidate(id) {
     contractInstance.voteForCandidate(candidateName, {
       from: web3.eth.accounts[0]
     }, function () {
-      //console.log(contractInstance.validCandidate.call(candidateName).toString())
       console.log(contractInstance.totalVotesFor.call(candidateName).toString());
       window.location = "/voteadded/" + id;
     });
   }
 }
 
-//  async function addNewCandidate(newcandidate) {
-//   var cand_length = Object.keys(candidates).length
-//   candidates[`${newcandidate}`] = "candidate-"+(cand_length+1);
-//   console.log(candidates);
-//   var candidateName = newcandidate;
-//   console.log("new candidate =>",candidateName)
 
-//     contractInstance.addCandidate(candidateName, {
-//       from: web3.eth.accounts[0]
-//     }, function () {
-   
-//       console.log(contractInstance.validCandidate.call(candidateName).toString());
-      
-//     });
-// }
-//addNewCandidate()
-
-// var electionResults = {
-//   Rahul: '10',
-//   Arvind: '5',
-//   Narendra: '2',
-//   Rajnath: '1',
-//   Piyush: '4',
-//   Smriti: '5'
-// }
 function getElectionResults() {
   var voteResults = {};
   var candidateNames = Object.keys(candidates);
@@ -82,23 +56,5 @@ function getElectionResults() {
     var val = contractInstance.totalVotesFor.call(name).toLocaleString();
     voteResults[name] = val;
   }
-  console.log(voteResults)
   return voteResults;
 }
-// electionResults;
-// console.log(contractInstance.candidateList(0,{from: web3.eth.accounts[0]}))
-// console.log(contractInstance.validCandidate(('Arvind'), {
-//   from: web3.eth.accounts[0]}))
-// }), function () {
-//   //console.log(contractInstance.validCandidate.call(candidateName).toString())
- // console.log(contractInstance.totalVotesFor.call("Rahul").toString());
-//   //window.location = "/voteadded/" + id;
-// }))
-// $(document).ready(function () {
-//   candidateNames = Object.keys(candidates);
-//   for (var i = 0; i < candidateNames.length; i++) {
-//     let name = candidateNames[i];
-//     let val = contractInstance.totalVotesFor.call(name).toString()
-//     $("#" + candidates[name]).html(val);
-//   }
-// });
